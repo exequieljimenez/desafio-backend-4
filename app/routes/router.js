@@ -1,4 +1,5 @@
 const express = require("express");
+const { reset } = require("nodemon");
 
 const Router = require("express").Router;
 
@@ -7,7 +8,7 @@ const router = Router();
 router.use(express.json());
 router.use(express.urlencoded({extended: true}))
 
-const productos = [{id: 1, titulo: "superunknown", banda: "soundgarden", anio: 1994}, {id: 2, titulo: "ten", banda: "pearl jam", anio: 1991}]
+const productos = [{id: 1, titulo: "superunknown", banda: "soundgarden", anio: 1994}, {id: 2, titulo: "ten", banda: "pearl jam", anio: 1991}, {id: 3, titulo: "dirt", banda: "alice in chains", year: 1992}]
 
 router.get('/productos', (req, res) => {
     res.send({productos})
@@ -24,6 +25,38 @@ router.post('/productos', (req, res) => {
     const id = productos.length + 1;
     const nuevoProducto = {id, ...producto};
     productos.push(nuevoProducto)
+    res.send({productos})
+})
+
+// router.put('/productos/:id', (req, res) => {
+//     const {titulo, banda, anio} = req.body;
+//     let {id} = req.params;
+//     id = parseInt(id)
+//     const nuevoProducto = {id, titulo, banda, anio}
+//     console.log(Object.keys(nuevoProducto))
+//     const nuevaLista = productos.filter((el) => el.id != id)
+//     nuevaLista.push(nuevoProducto)
+//     res.send({nuevaLista})  
+// })
+
+// router.put('/productos/:id', (req, res) => {
+//     const {titulo, banda, anio} = req.body;
+//     let {id} = req.params;
+//     id = parseInt(id)
+//     let productoElegido = productos.findIndex((el) => el.id === id)
+//     console.log({productoElegido})
+//     productoElegido = {id, titulo, banda, anio}
+//     console.log({productoElegido})
+//     console.log({productos})
+// })
+
+router.put('/productos/:id', (req, res) => {
+    const {titulo, banda, anio} = req.body;
+    let {id} = req.params;
+    id = parseInt(id)
+    let posicionProducto = productos.findIndex((el) => el.id === id)
+    productoElegido = {id, titulo, banda, anio}
+    productos[posicionProducto] = productoElegido;
     res.send({productos})
 })
 
