@@ -28,28 +28,6 @@ router.post('/productos', (req, res) => {
     res.send({productos})
 })
 
-// router.put('/productos/:id', (req, res) => {
-//     const {titulo, banda, anio} = req.body;
-//     let {id} = req.params;
-//     id = parseInt(id)
-//     const nuevoProducto = {id, titulo, banda, anio}
-//     console.log(Object.keys(nuevoProducto))
-//     const nuevaLista = productos.filter((el) => el.id != id)
-//     nuevaLista.push(nuevoProducto)
-//     res.send({nuevaLista})  
-// })
-
-// router.put('/productos/:id', (req, res) => {
-//     const {titulo, banda, anio} = req.body;
-//     let {id} = req.params;
-//     id = parseInt(id)
-//     let productoElegido = productos.findIndex((el) => el.id === id)
-//     console.log({productoElegido})
-//     productoElegido = {id, titulo, banda, anio}
-//     console.log({productoElegido})
-//     console.log({productos})
-// })
-
 router.put('/productos/:id', (req, res) => {
     const {titulo, banda, anio} = req.body;
     let {id} = req.params;
